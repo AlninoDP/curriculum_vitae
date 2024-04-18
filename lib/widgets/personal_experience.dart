@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class PersonalExperience extends StatelessWidget {
   const PersonalExperience(
-      {super.key, required this.jobText, required this.btnText});
+      {super.key,
+      required this.jobText,
+      required this.btnText,
+      this.onPressed});
   final String jobText;
   final String btnText;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class PersonalExperience extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        ElevatedButton(onPressed: () {}, child: Text(btnText))
+        ElevatedButton(onPressed: onPressed, child: Text(btnText))
       ],
     );
   }

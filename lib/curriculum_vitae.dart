@@ -1,6 +1,9 @@
+import 'package:curriculum_vitae/widgets/alert_box.dart';
 import 'package:curriculum_vitae/widgets/personal_experience.dart';
+import 'package:curriculum_vitae/widgets/skill_information.dart';
 import 'package:curriculum_vitae/widgets/social_info.dart';
 import 'package:curriculum_vitae/widgets/show_text.dart';
+import 'package:curriculum_vitae/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,7 +24,7 @@ class CurriculumVitae extends StatelessWidget {
                       image: AssetImage('assets/images/bg.jpg'),
                     ),
                   ),
-                  child: profileTopPart()),
+                  child: _profileTopPart()),
               const Divider(
                 thickness: 2,
               ),
@@ -35,22 +38,17 @@ class CurriculumVitae extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Ringkasan',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          )),
-                      const ShowText(text: textIntroduction),
-                      const SizedBox(height: 5),
-                      const Text('Pengalaman Kerja',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          )),
+                      //* Summary
+                      TitleText(titleText: 'Summary'),
+                      ShowText(text: textIntroduction),
+                      SizedBox(height: 5),
+
+                      //* Work Experience
+                      TitleText(titleText: 'Pengalaman Kerja'),
                       PersonalExperience(
                           jobText:
                               'PT Denso Manufacturing Indonesia | Operator Produksi | 17/05/2019 - 15/05/2020',
@@ -58,7 +56,78 @@ class CurriculumVitae extends StatelessWidget {
                       PersonalExperience(
                           jobText:
                               'PT Denso Indonesia | Operator Produksi | 17/03/2017 - 16/03/2019',
-                          btnText: 'Lihat')
+                          btnText: 'Lihat'),
+                      SizedBox(height: 5),
+
+                      //* Project Experience
+                      TitleText(titleText: 'Pengalaman Project'),
+                      PersonalExperience(
+                        jobText: 'E-Lement | College Project | Flutter Project',
+                        btnText: 'Lihat',
+                      ),
+                      PersonalExperience(
+                        jobText: 'AdviceApp | Course Project | Flutter Project',
+                        btnText: 'Lihat',
+                      ),
+                      PersonalExperience(
+                          jobText:
+                              'QuestionTask | Capstone Project | Flutter Project',
+                          btnText: 'Lihat',
+                          onPressed: () => _showAlertBox(context)),
+                      SizedBox(height: 5),
+
+                      //* Skills
+                      TitleText(titleText: 'Kemampuan'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SkillInformation(
+                            imgSrc: 'assets/icons/dart_icon.png',
+                            text: 'Dart',
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          SkillInformation(
+                            imgSrc: 'assets/icons/flutter_icon.png',
+                            text: 'Flutter',
+                          ),
+                          SkillInformation(
+                            imgSrc: 'assets/icons/git_icon.png',
+                            text: 'Git',
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SkillInformation(
+                            imgSrc: 'assets/icons/vscode_icon.png',
+                            text: 'Vs Code',
+                          ),
+                          SkillInformation(
+                            imgSrc: 'assets/icons/figma_icon.png',
+                            text: 'Figma',
+                          ),
+                        ],
+                      ),
+
+                      //* Education
+                      TitleText(titleText: 'Pendidikan'),
+                      Text(
+                        '\u2022 Universitas Esa Unggul | 2022 - Sekarang',
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        '\u2022 SMKN 1 Kota Bekasi | 2013 - 2016',
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -70,7 +139,7 @@ class CurriculumVitae extends StatelessWidget {
     );
   }
 
-  Padding profileTopPart() {
+  Padding _profileTopPart() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -118,14 +187,25 @@ class CurriculumVitae extends StatelessWidget {
       ),
     );
   }
+
+  void _showAlertBox(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertBox(
+          title: "Alert",
+          content: "Ini adalah pesan peringatan.",
+          onPressed: () {
+            Navigator.of(context).pop(); // Close the dialog
+          },
+        );
+      },
+    );
+  }
 }
 
 const textIntroduction = '''
-Seorang pengembang Flutter yang bersemangat dalam menciptakan aplikasi mobile yang menarik dan inovatif. Dalam waktu luang, saya senang membuat aplikasi sederhana untuk pembelajaran maupun hiburan. 
-
-Saya memiliki keinginan yang kuat untuk terus belajar dan memperluas keterampilan saya.
-
-Kemampuan saya termasuk mengembangkan antarmuka pengguna yang responsif dan menarik menggunakan Flutter, serta kemampuan untuk memecahkan masalah dan bekerja baik secara tim maupun secara mandiri.
+Halo saya Alnino, Saya memiliki keinginan yang kuat untuk terus belajar dan memperluas keterampilan saya. Kemampuan saya termasuk mengembangkan antarmuka pengguna yang responsif dan menarik menggunakan Flutter, serta kemampuan untuk memecahkan masalah dan bekerja baik secara tim maupun secara mandiri.
 
 Saya juga memiliki pengalaman dalam mengintegrasikan liblary pihak ketiga dan mengelola state menggunakan GetX, Provider, dan BLoC/Cubit."
 ''';

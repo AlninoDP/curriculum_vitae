@@ -4,7 +4,7 @@ class ShowText extends StatefulWidget {
   const ShowText({
     Key? key,
     required this.text,
-    this.maxLines = 4,
+    this.maxLines = 3,
   }) : super(key: key);
 
   final String text;
