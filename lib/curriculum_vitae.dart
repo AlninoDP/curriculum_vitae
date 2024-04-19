@@ -18,7 +18,7 @@ class CurriculumVitae extends StatelessWidget {
       child: Scaffold(
         body: CustomBackground(
           imgSrc: 'assets/images/bg_body.png',
-          opacity: 0.6,
+          opacity: 0.4,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -58,6 +58,7 @@ class CurriculumVitae extends StatelessWidget {
               content: workExperienceText[0],
             ),
           ),
+          const SizedBox(height: 5),
           PersonalExperience(
             jobText:
                 'PT Denso Indonesia | Operator Produksi | 17/03/2017 - 16/03/2019',
@@ -77,6 +78,8 @@ class CurriculumVitae extends StatelessWidget {
               content: projectExperienceText[0],
             ),
           ),
+          const SizedBox(height: 5),
+
           PersonalExperience(
             jobText: 'AdviceApp | Course Project | Flutter Project',
             onPressed: () => _showJobResponsibility(
@@ -84,6 +87,8 @@ class CurriculumVitae extends StatelessWidget {
               content: projectExperienceText[1],
             ),
           ),
+          const SizedBox(height: 5),
+
           PersonalExperience(
               jobText: 'QuestionTask | Capstone Project | Flutter Project',
               onPressed: () => _showJobResponsibility(
@@ -137,6 +142,7 @@ class CurriculumVitae extends StatelessWidget {
               fontSize: 16,
             ),
           ),
+          const SizedBox(height: 5),
           const Text(
             '\u2022 SMKN 1 Kota Bekasi | 2013 - 2016',
             textAlign: TextAlign.justify,

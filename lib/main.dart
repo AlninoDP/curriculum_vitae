@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Curriculum Vitae',
+      title: 'AlninoDp CV',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
