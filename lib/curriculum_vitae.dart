@@ -14,23 +14,23 @@ class CurriculumVitae extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CustomBackground(
-                imgSrc: 'assets/images/bg.jpg',
-                child: _profileTopPart(),
-              ),
+    return SafeArea(
+      child: Scaffold(
+        body: CustomBackground(
+          imgSrc: 'assets/images/bg_body.png',
+          opacity: 0.6,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomBackground(
+                  imgSrc: 'assets/images/bg.jpg',
+                  child: _profileTopPart(),
+                ),
 
-              //* body
-              CustomBackground(
-                imgSrc: 'assets/images/bg_body.png',
-                opacity: 0.4,
-                child: _profileBodyPart(context),
-              ),
-            ],
+                //* body
+                _profileBodyPart(context),
+              ],
+            ),
           ),
         ),
       ),
