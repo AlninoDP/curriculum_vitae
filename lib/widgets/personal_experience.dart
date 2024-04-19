@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PersonalExperience extends StatelessWidget {
-  const PersonalExperience(
-      {super.key,
-      required this.jobText,
-      required this.btnText,
-      this.onPressed});
+  const PersonalExperience({super.key, required this.jobText, this.onPressed});
   final String jobText;
-  final String btnText;
+
   final Function()? onPressed;
 
   @override
@@ -25,7 +21,13 @@ class PersonalExperience extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        ElevatedButton(onPressed: onPressed, child: Text(btnText))
+        ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            shape: const RoundedRectangleBorder(),
+          ),
+          child: const Icon(Icons.search),
+        )
       ],
     );
   }

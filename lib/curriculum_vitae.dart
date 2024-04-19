@@ -1,4 +1,6 @@
+import 'package:curriculum_vitae/const/constant.dart';
 import 'package:curriculum_vitae/widgets/alert_box.dart';
+import 'package:curriculum_vitae/widgets/custom_background.dart';
 import 'package:curriculum_vitae/widgets/personal_experience.dart';
 import 'package:curriculum_vitae/widgets/skill_information.dart';
 import 'package:curriculum_vitae/widgets/social_info.dart';
@@ -17,124 +19,132 @@ class CurriculumVitae extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/bg.jpg'),
-                    ),
-                  ),
-                  child: _profileTopPart()),
-              const Divider(
-                thickness: 2,
+              CustomBackground(
+                imgSrc: 'assets/images/bg.jpg',
+                child: _profileTopPart(),
               ),
+
               //* body
-              Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/images/bg_body2.png'),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //* Summary
-                      TitleText(titleText: 'Summary'),
-                      ShowText(text: textIntroduction),
-                      SizedBox(height: 5),
-
-                      //* Work Experience
-                      TitleText(titleText: 'Pengalaman Kerja'),
-                      PersonalExperience(
-                          jobText:
-                              'PT Denso Manufacturing Indonesia | Operator Produksi | 17/05/2019 - 15/05/2020',
-                          btnText: 'Lihat'),
-                      PersonalExperience(
-                          jobText:
-                              'PT Denso Indonesia | Operator Produksi | 17/03/2017 - 16/03/2019',
-                          btnText: 'Lihat'),
-                      SizedBox(height: 5),
-
-                      //* Project Experience
-                      TitleText(titleText: 'Pengalaman Project'),
-                      PersonalExperience(
-                        jobText: 'E-Lement | College Project | Flutter Project',
-                        btnText: 'Lihat',
-                      ),
-                      PersonalExperience(
-                        jobText: 'AdviceApp | Course Project | Flutter Project',
-                        btnText: 'Lihat',
-                      ),
-                      PersonalExperience(
-                          jobText:
-                              'QuestionTask | Capstone Project | Flutter Project',
-                          btnText: 'Lihat',
-                          onPressed: () => _showAlertBox(context)),
-                      SizedBox(height: 5),
-
-                      //* Skills
-                      TitleText(titleText: 'Kemampuan'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SkillInformation(
-                            imgSrc: 'assets/icons/dart_icon.png',
-                            text: 'Dart',
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          SkillInformation(
-                            imgSrc: 'assets/icons/flutter_icon.png',
-                            text: 'Flutter',
-                          ),
-                          SkillInformation(
-                            imgSrc: 'assets/icons/git_icon.png',
-                            text: 'Git',
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SkillInformation(
-                            imgSrc: 'assets/icons/vscode_icon.png',
-                            text: 'Vs Code',
-                          ),
-                          SkillInformation(
-                            imgSrc: 'assets/icons/figma_icon.png',
-                            text: 'Figma',
-                          ),
-                        ],
-                      ),
-
-                      //* Education
-                      TitleText(titleText: 'Pendidikan'),
-                      Text(
-                        '\u2022 Universitas Esa Unggul | 2022 - Sekarang',
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        '\u2022 SMKN 1 Kota Bekasi | 2013 - 2016',
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+              CustomBackground(
+                imgSrc: 'assets/images/bg_body.png',
+                opacity: 0.4,
+                child: _profileBodyPart(context),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Padding _profileBodyPart(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //* Summary
+          const TitleText(titleText: 'Summary'),
+          const ShowText(text: textIntroduction),
+          const SizedBox(height: 5),
+
+          //* Work Experience
+          const TitleText(titleText: 'Pengalaman Kerja'),
+          PersonalExperience(
+            jobText:
+                'PT Denso Manufacturing Indonesia | Operator Produksi | 17/05/2019 - 15/05/2020',
+            onPressed: () => _showJobResponsibility(
+              context: context,
+              content: workExperienceText[0],
+            ),
+          ),
+          PersonalExperience(
+            jobText:
+                'PT Denso Indonesia | Operator Produksi | 17/03/2017 - 16/03/2019',
+            onPressed: () => _showJobResponsibility(
+              context: context,
+              content: workExperienceText[1],
+            ),
+          ),
+          const SizedBox(height: 5),
+
+          //* Project Experience
+          const TitleText(titleText: 'Pengalaman Project'),
+          PersonalExperience(
+            jobText: 'E-Lement | College Project | Flutter Project',
+            onPressed: () => _showJobResponsibility(
+              context: context,
+              content: projectExperienceText[0],
+            ),
+          ),
+          PersonalExperience(
+            jobText: 'AdviceApp | Course Project | Flutter Project',
+            onPressed: () => _showJobResponsibility(
+              context: context,
+              content: projectExperienceText[1],
+            ),
+          ),
+          PersonalExperience(
+              jobText: 'QuestionTask | Capstone Project | Flutter Project',
+              onPressed: () => _showJobResponsibility(
+                    context: context,
+                    content: projectExperienceText[2],
+                  )),
+          const SizedBox(height: 5),
+
+          //* Skills
+          const TitleText(titleText: 'Kemampuan'),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SkillInformation(
+                imgSrc: 'assets/icons/dart_icon.png',
+                text: 'Dart',
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              SkillInformation(
+                imgSrc: 'assets/icons/flutter_icon.png',
+                text: 'Flutter',
+              ),
+              SkillInformation(
+                imgSrc: 'assets/icons/git_icon.png',
+                text: 'Git',
+              ),
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SkillInformation(
+                imgSrc: 'assets/icons/vscode_icon.png',
+                text: 'Vs Code',
+              ),
+              SkillInformation(
+                imgSrc: 'assets/icons/figma_icon.png',
+                text: 'Figma',
+              ),
+            ],
+          ),
+
+          //* Education
+          const TitleText(titleText: 'Pendidikan'),
+          const Text(
+            '\u2022 Universitas Esa Unggul | 2022 - Sekarang',
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          const Text(
+            '\u2022 SMKN 1 Kota Bekasi | 2013 - 2016',
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -188,24 +198,21 @@ class CurriculumVitae extends StatelessWidget {
     );
   }
 
-  void _showAlertBox(BuildContext context) {
+  void _showJobResponsibility({
+    required BuildContext context,
+    required String content,
+  }) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertBox(
-          title: "Alert",
-          content: "Ini adalah pesan peringatan.",
+          title: 'Responsibility',
+          content: content,
           onPressed: () {
-            Navigator.of(context).pop(); // Close the dialog
+            Navigator.of(context).pop();
           },
         );
       },
     );
   }
 }
-
-const textIntroduction = '''
-Halo saya Alnino, Saya memiliki keinginan yang kuat untuk terus belajar dan memperluas keterampilan saya. Kemampuan saya termasuk mengembangkan antarmuka pengguna yang responsif dan menarik menggunakan Flutter, serta kemampuan untuk memecahkan masalah dan bekerja baik secara tim maupun secara mandiri.
-
-Saya juga memiliki pengalaman dalam mengintegrasikan liblary pihak ketiga dan mengelola state menggunakan GetX, Provider, dan BLoC/Cubit."
-''';
